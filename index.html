@@ -1,342 +1,477 @@
-
----
-
-## 📄 2. index.html
-
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Agrinho - Agro Forte, Futuro Sustentável. Descubra como a agricultura sustentável constrói um futuro melhor.">
-    <meta name="keywords" content="Agrinho, agricultura sustentável, meio ambiente, agro, futuro">
-    <title>Agrinho 🌱 | Agro Forte, Futuro Sustentável</title>
+    <meta name="description" content="Agrinho - Agro forte, futuro sustentável. Descubra como a agricultura sustentável constrói um futuro melhor.">
+    <meta name="keywords" content="agrinho, agricultura sustentável, agro, futuro, meio ambiente, ODS">
+    <title>Agrinho | Agro Forte, Futuro Sustentável</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <!-- HEADER / NAVEGAÇÃO -->
     <header class="header" id="header">
-        <nav class="nav container">
-            <a href="#home" class="nav__logo">
+        <div class="container nav-container">
+            <a href="#home" class="logo">
                 <span class="logo-icon">🌱</span>
                 <span class="logo-text">Agrinho</span>
             </a>
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <li class="nav__item"><a href="#home" class="nav__link active">Início</a></li>
-                    <li class="nav__item"><a href="#sobre" class="nav__link">Sobre</a></li>
-                    <li class="nav__item"><a href="#praticas" class="nav__link">Práticas</a></li>
-                    <li class="nav__item"><a href="#impacto" class="nav__link">Impacto</a></li>
-                    <li class="nav__item"><a href="#quiz" class="nav__link">Quiz</a></li>
-                    <li class="nav__item"><a href="#contato" class="nav__link">Contato</a></li>
+            <nav class="nav" id="nav">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active">Início</a></li>
+                    <li><a href="#sobre" class="nav-link">O Agro</a></li>
+                    <li><a href="#pilares" class="nav-link">Pilares</a></li>
+                    <li><a href="#praticas" class="nav-link">Práticas</a></li>
+                    <li><a href="#ods" class="nav-link">ODS</a></li>
+                    <li><a href="#quiz" class="nav-link">Quiz</a></li>
+                    <li><a href="#calculadora" class="nav-link">Calculadora</a></li>
                 </ul>
-            </div>
-            <div class="nav__toggle" id="nav-toggle">
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
                 <span></span><span></span><span></span>
-            </div>
-        </nav>
+            </button>
+        </div>
     </header>
 
-    <!-- HERO / INÍCIO -->
+    <!-- HERO -->
     <section class="hero" id="home">
-        <div class="hero__bg"></div>
-        <div class="hero__content container">
-            <span class="hero__subtitle">Programa Agrinho 2026</span>
-            <h1 class="hero__title">
+        <div class="hero-bg"></div>
+        <div class="particles" id="particles"></div>
+        <div class="container hero-content">
+            <span class="hero-badge">🌾 Concurso Agrinho 2026</span>
+            <h1 class="hero-title">
                 Agro <span class="highlight">Forte</span>,<br>
-                Futuro <span class="highlight">Sustentável</span>
+                Futuro <span class="highlight-alt">Sustentável</span>
             </h1>
-            <p class="hero__text">
-                Do campo à cidade, cultivamos um futuro onde a produção agrícola 
-                caminha lado a lado com a preservação ambiental. Descubra como 
-                cada gesto conta para transformar o mundo.
+            <p class="hero-subtitle">
+                Descubra como a agricultura consciente alimenta o presente e preserva o amanhã. 
+                Um convite para cultivar um mundo melhor, onde o campo e a natureza caminham juntos.
             </p>
-            <div class="hero__buttons">
-                <a href="#sobre" class="btn btn--primary">Explorar 🌿</a>
-                <a href="#quiz" class="btn btn--secondary">Fazer o Quiz 🎯</a>
+            <div class="hero-buttons">
+                <a href="#sobre" class="btn btn-primary">Explorar o tema</a>
+                <a href="#quiz" class="btn btn-secondary">Fazer o Quiz</a>
             </div>
-            <div class="hero__stats">
-                <div class="stat">
-                    <span class="stat__number" data-target="150">0</span><span class="stat__plus">+</span>
-                    <span class="stat__label">Anos de Agricultura</span>
-                </div>
-                <div class="stat">
-                    <span class="stat__number" data-target="30">0</span><span class="stat__plus">%</span>
-                    <span class="stat__label">Energia Renovável</span>
-                </div>
-                <div class="stat">
-                    <span class="stat__number" data-target="1000">0</span><span class="stat__plus">+</span>
-                    <span class="stat__label">Comunidades</span>
-                </div>
+            <div class="scroll-indicator">
+                <span>Role para descobrir</span>
+                <div class="scroll-arrow"></div>
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <span>Role para baixo</span>
-            <div class="scroll-arrow"></div>
         </div>
     </section>
 
-    <!-- SOBRE -->
+    <!-- SOBRE O AGRO -->
     <section class="section about" id="sobre">
         <div class="container">
-            <div class="section__header">
-                <span class="section__subtitle">Conheça o tema</span>
-                <h2 class="section__title">O que é um Agro Sustentável?</h2>
-                <p class="section__description">
-                    A agricultura sustentável é aquela que produz alimentos de qualidade, 
-                    respeitando o meio ambiente, valorizando o trabalhador rural e garantindo 
-                    recursos para as próximas gerações.
+            <div class="section-header">
+                <span class="section-tag">Conceito</span>
+                <h2 class="section-title">O que é o Agro Sustentável?</h2>
+                <p class="section-subtitle">
+                    Uma forma de produzir alimentos, fibras e energia que respeita os limites da natureza, 
+                    valoriza as pessoas e garante recursos para as próximas gerações.
                 </p>
             </div>
-            <div class="about__grid">
-                <div class="about__card reveal">
-                    <div class="about__icon">🌾</div>
-                    <h3>Produção Consciente</h3>
-                    <p>
-                        Cultivar respeitando os ciclos da natureza, usando técnicas que 
-                        preservam o solo e a biodiversidade, sem comprometer a produtividade.
-                    </p>
+            <div class="about-grid">
+                <div class="about-card" data-aos="fade-up">
+                    <div class="about-icon">🌍</div>
+                    <h3>Equilíbrio Ambiental</h3>
+                    <p>Produzir sem destruir. A agricultura sustentável protege solos, rios, florestas e a biodiversidade, mantendo os ecossistemas vivos e produtivos.</p>
                 </div>
-                <div class="about__card reveal">
-                    <div class="about__icon">💧</div>
-                    <h3>Uso Inteligente da Água</h3>
-                    <p>
-                        Sistemas de irrigação eficientes e captação de água da chuva 
-                        garantem o uso racional do recurso mais precioso do planeta.
-                    </p>
+                <div class="about-card" data-aos="fade-up" data-delay="100">
+                    <div class="about-icon">👨‍🌾</div>
+                    <h3>Valorização Humana</h3>
+                    <p>Respeito ao trabalhador rural, apoio à agricultura familiar e fortalecimento das comunidades do campo, garantindo dignidade e qualidade de vida.</p>
                 </div>
-                <div class="about__card reveal">
-                    <div class="about__icon">🌳</div>
-                    <h3>Preservação Ambiental</h3>
-                    <p>
-                        Manter florestas em pé, proteger nascentes e recuperar áreas 
-                        degradadas é essencial para o equilíbrio ecológico.
-                    </p>
+                <div class="about-card" data-aos="fade-up" data-delay="200">
+                    <div class="about-icon">💡</div>
+                    <h3>Inovação Tecnológica</h3>
+                    <p>Uso de tecnologias limpas, agricultura de precisão, bioinsumos e inteligência artificial para produzir mais com menos recursos.</p>
                 </div>
-                <div class="about__card reveal">
-                    <div class="about__icon">👨‍🌾</div>
-                    <h3>Valorização do Campo</h3>
-                    <p>
-                        Fortalecer a agricultura familiar, garantir condições dignas de 
-                        trabalho e valorizar quem produz nosso alimento.
-                    </p>
+                <div class="about-card" data-aos="fade-up" data-delay="300">
+                    <div class="about-icon">🔄</div>
+                    <h3>Economia Circular</h3>
+                    <p>Reaproveitamento de resíduos, integração lavoura-pecuária-floresta e ciclos produtivos que reduzem desperdícios e emissões.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PRÁTICAS SUSTENTÁVEIS -->
+    <!-- PILARES -->
+    <section class="section pillars" id="pilares">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Fundamentos</span>
+                <h2 class="section-title">Os 6 Pilares do Agro Sustentável</h2>
+                <p class="section-subtitle">
+                    Bases que sustentam uma agricultura forte, justa e preparada para o futuro.
+                </p>
+            </div>
+            <div class="pillars-grid">
+                <div class="pillar-card" style="--accent:#2d7a3e">
+                    <div class="pillar-number">01</div>
+                    <div class="pillar-icon">🌳</div>
+                    <h3>Preservação</h3>
+                    <p>Proteção de matas ciliares, reservas legais e biodiversidade nativa.</p>
+                </div>
+                <div class="pillar-card" style="--accent:#4a9d5b">
+                    <div class="pillar-number">02</div>
+                    <div class="pillar-icon">💧</div>
+                    <h3>Água Limpa</h3>
+                    <p>Uso consciente e proteção dos recursos hídricos no campo.</p>
+                </div>
+                <div class="pillar-card" style="--accent:#7cb342">
+                    <div class="pillar-number">03</div>
+                    <div class="pillar-icon">🌾</div>
+                    <h3>Solo Vivo</h3>
+                    <p>Plantio direto, rotação de culturas e adubação verde.</p>
+                </div>
+                <div class="pillar-card" style="--accent:#c0a062">
+                    <div class="pillar-number">04</div>
+                    <div class="pillar-icon">☀️</div>
+                    <h3>Energia Limpa</h3>
+                    <p>Biogás, solar e biomassa como fontes renováveis no agro.</p>
+                </div>
+                <div class="pillar-card" style="--accent:#d97706">
+                    <div class="pillar-number">05</div>
+                    <div class="pillar-icon">🤝</div>
+                    <h3>Inclusão Social</h3>
+                    <p>Apoio ao pequeno produtor, jovens rurais e comunidades tradicionais.</p>
+                </div>
+                <div class="pillar-card" style="--accent:#8b5a2b">
+                    <div class="pillar-number">06</div>
+                    <div class="pillar-icon">📊</div>
+                    <h3>Gestão Inteligente</h3>
+                    <p>Tecnologia, dados e planejamento para decisões sustentáveis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NÚMEROS -->
+    <section class="section stats" id="numeros">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Impacto</span>
+                <h2 class="section-title">O Agro em Números</h2>
+                <p class="section-subtitle">Dados que mostram a força do campo brasileiro rumo a um futuro sustentável.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🌎</div>
+                    <div class="stat-number" data-target="25">0</div>
+                    <div class="stat-suffix">%</div>
+                    <p class="stat-label">do PIB brasileiro vem do agro</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-number" data-target="70">0</div>
+                    <div class="stat-suffix">%</div>
+                    <p class="stat-label">dos alimentos no mundo vêm da agricultura familiar</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🌱</div>
+                    <div class="stat-number" data-target="66">0</div>
+                    <div class="stat-suffix">%</div>
+                    <p class="stat-label">do território brasileiro é preservado</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-number" data-target="48">0</div>
+                    <div class="stat-suffix">%</div>
+                    <p class="stat-label">da matriz energética é renovável</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRÁTICAS -->
     <section class="section practices" id="praticas">
         <div class="container">
-            <div class="section__header">
-                <span class="section__subtitle">Soluções reais</span>
-                <h2 class="section__title">Práticas que Transformam</h2>
-                <p class="section__description">
-                    Conheça técnicas inovadoras que estão revolucionando o campo brasileiro, 
-                    unindo tecnologia e sustentabilidade.
-                </p>
+            <div class="section-header">
+                <span class="section-tag">Ação</span>
+                <h2 class="section-title">Práticas Sustentáveis no Campo</h2>
+                <p class="section-subtitle">Conheça técnicas que transformam a agricultura em força do bem.</p>
             </div>
-            <div class="practices__grid">
-                <article class="practice__card reveal">
-                    <div class="practice__image" style="background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600')"></div>
-                    <div class="practice__content">
-                        <span class="practice__tag">Tecnologia</span>
-                        <h3>Agricultura de Precisão</h3>
-                        <p>Uso de drones, sensores e GPS para aplicar insumos apenas onde necessário, reduzindo desperdícios e impactos ambientais.</p>
+            <div class="practices-grid">
+                <article class="practice-card">
+                    <div class="practice-img" style="background:linear-gradient(135deg,#2d7a3e,#7cb342)">
+                        <span class="practice-emoji">🌿</span>
                     </div>
-                </article>
-                <article class="practice__card reveal">
-                    <div class="practice__image" style="background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600')"></div>
-                    <div class="practice__content">
-                        <span class="practice__tag">Solo</span>
+                    <div class="practice-content">
                         <h3>Plantio Direto</h3>
-                        <p>Técnica que mantém a palhada sobre o solo, preservando a umidade, evitando erosão e aumentando a fertilidade natural.</p>
+                        <p>Técnica que preserva o solo, mantém a umidade e reduz a erosão, aumentando a produtividade sem agredir a terra.</p>
+                        <span class="practice-tag">Solo</span>
                     </div>
                 </article>
-                <article class="practice__card reveal">
-                    <div class="practice__image" style="background-image: url('https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600')"></div>
-                    <div class="practice__content">
-                        <span class="practice__tag">Integração</span>
-                        <h3>Sistema ILPF</h3>
-                        <p>Integração Lavoura-Pecuária-Floresta combina produção agrícola, animal e florestal numa mesma área, potencializando resultados.</p>
+                <article class="practice-card">
+                    <div class="practice-img" style="background:linear-gradient(135deg,#4a9d5b,#c0a062)">
+                        <span class="practice-emoji">🐄🌳</span>
+                    </div>
+                    <div class="practice-content">
+                        <h3>ILPF - Integração</h3>
+                        <p>Lavoura, Pecuária e Floresta juntas. Sistema que multiplica resultados e regenera o ambiente.</p>
+                        <span class="practice-tag">Integração</span>
                     </div>
                 </article>
-                <article class="practice__card reveal">
-                    <div class="practice__image" style="background-image: url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600')"></div>
-                    <div class="practice__content">
-                        <span class="practice__tag">Energia</span>
-                        <h3>Energia Solar no Campo</h3>
-                        <p>Painéis solares alimentam irrigação, cercas elétricas e residências rurais, reduzindo custos e emissões de carbono.</p>
+                <article class="practice-card">
+                    <div class="practice-img" style="background:linear-gradient(135deg,#7cb342,#d97706)">
+                        <span class="practice-emoji">🐞</span>
                     </div>
-                </article>
-                <article class="practice__card reveal">
-                    <div class="practice__image" style="background-image: url('https://images.unsplash.com/photo-1592982537447-6f2a6a0c7c18?w=600')"></div>
-                    <div class="practice__content">
-                        <span class="practice__tag">Biodiversidade</span>
+                    <div class="practice-content">
                         <h3>Controle Biológico</h3>
-                        <p>Uso de insetos benéficos e microrganismos para combater pragas, diminuindo o uso de agrotóxicos químicos.</p>
+                        <p>Uso de insetos benéficos e microrganismos no lugar de agrotóxicos, protegendo a saúde e o ambiente.</p>
+                        <span class="practice-tag">Biodiversidade</span>
                     </div>
                 </article>
-                <article class="practice__card reveal">
-                    <div class="practice__image" style="background-image: url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600')"></div>
-                    <div class="practice__content">
-                        <span class="practice__tag">Orgânico</span>
-                        <h3>Agricultura Orgânica</h3>
-                        <p>Produção sem agrotóxicos nem fertilizantes sintéticos, valorizando a saúde do solo, dos alimentos e das pessoas.</p>
+                <article class="practice-card">
+                    <div class="practice-img" style="background:linear-gradient(135deg,#c0a062,#8b5a2b)">
+                        <span class="practice-emoji">☀️</span>
+                    </div>
+                    <div class="practice-content">
+                        <h3>Energia Solar Rural</h3>
+                        <p>Painéis fotovoltaicos que irrigam, iluminam e abastecem propriedades, reduzindo custos e emissões.</p>
+                        <span class="practice-tag">Energia</span>
+                    </div>
+                </article>
+                <article class="practice-card">
+                    <div class="practice-img" style="background:linear-gradient(135deg,#8b5a2b,#2d7a3e)">
+                        <span class="practice-emoji">🚜</span>
+                    </div>
+                    <div class="practice-content">
+                        <h3>Agricultura de Precisão</h3>
+                        <p>Drones, sensores e GPS aplicados no campo para usar insumos com eficiência e reduzir desperdícios.</p>
+                        <span class="practice-tag">Tecnologia</span>
+                    </div>
+                </article>
+                <article class="practice-card">
+                    <div class="practice-img" style="background:linear-gradient(135deg,#d97706,#4a9d5b)">
+                        <span class="practice-emoji">🐓</span>
+                    </div>
+                    <div class="practice-content">
+                        <h3>Biodigestores</h3>
+                        <p>Transformam dejetos animais em biogás e adubo orgânico, gerando energia limpa e fertilidade.</p>
+                        <span class="practice-tag">Resíduos</span>
                     </div>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- CALCULADORA DE IMPACTO -->
-    <section class="section impact" id="impacto">
+    <!-- ODS -->
+    <section class="section ods" id="ods">
         <div class="container">
-            <div class="section__header">
-                <span class="section__subtitle">Calcule seu impacto</span>
-                <h2 class="section__title">Pegada Ecológica 🌍</h2>
-                <p class="section__description">
-                    Descubra quantas árvores seriam necessárias para compensar 
-                    suas escolhas diárias. Pequenas atitudes geram grandes mudanças!
-                </p>
+            <div class="section-header">
+                <span class="section-tag">ONU 2030</span>
+                <h2 class="section-title">Agro e os Objetivos de Desenvolvimento Sustentável</h2>
+                <p class="section-subtitle">O agro sustentável é peça-chave para alcançar a Agenda 2030 da ONU.</p>
             </div>
-            <div class="calculator reveal">
-                <div class="calculator__form">
-                    <div class="form__group">
-                        <label for="banho">🚿 Minutos de banho por dia:</label>
-                        <input type="range" id="banho" min="5" max="30" value="10">
-                        <span class="range-value" id="banhoValue">10 min</span>
-                    </div>
-                    <div class="form__group">
-                        <label for="carne">🥩 Dias de carne por semana:</label>
-                        <input type="range" id="carne" min="0" max="7" value="3">
-                        <span class="range-value" id="carneValue">3 dias</span>
-                    </div>
-                    <div class="form__group">
-                        <label for="plastico">🛍️ Uso de plástico por semana:</label>
-                        <input type="range" id="plastico" min="0" max="20" value="5">
-                        <span class="range-value" id="plasticoValue">5 vezes</span>
-                    </div>
-                    <div class="form__group">
-                        <label for="transporte">🚗 Km de carro por dia:</label>
-                        <input type="range" id="transporte" min="0" max="100" value="20">
-                        <span class="range-value" id="transporteValue">20 km</span>
-                    </div>
-                    <button class="btn btn--primary" id="calcBtn">Calcular Impacto 🌱</button>
+            <div class="ods-grid">
+                <div class="ods-card" style="background:#dd1367">
+                    <span class="ods-num">2</span>
+                    <h4>Fome Zero</h4>
                 </div>
-                <div class="calculator__result" id="result">
-                    <div class="result__icon">🌳</div>
-                    <h3 class="result__title">Resultado</h3>
-                    <p class="result__number" id="resultNumber">0</p>
-                    <p class="result__text" id="resultText">
-                        Preencha os dados e clique em calcular!
-                    </p>
-                    <div class="result__tip" id="resultTip"></div>
+                <div class="ods-card" style="background:#439f44">
+                    <span class="ods-num">6</span>
+                    <h4>Água Potável</h4>
+                </div>
+                <div class="ods-card" style="background:#ffa533">
+                    <span class="ods-num">7</span>
+                    <h4>Energia Limpa</h4>
+                </div>
+                <div class="ods-card" style="background:#a91e45">
+                    <span class="ods-num">8</span>
+                    <h4>Trabalho Digno</h4>
+                </div>
+                <div class="ods-card" style="background:#e7243c">
+                    <span class="ods-num">9</span>
+                    <h4>Inovação</h4>
+                </div>
+                <div class="ods-card" style="background:#dd1367">
+                    <span class="ods-num">12</span>
+                    <h4>Consumo Responsável</h4>
+                </div>
+                <div class="ods-card" style="background:#3f7e44">
+                    <span class="ods-num">13</span>
+                    <h4>Ação Climática</h4>
+                </div>
+                <div class="ods-card" style="background:#56ba3d">
+                    <span class="ods-num">15</span>
+                    <h4>Vida Terrestre</h4>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- QUIZ -->
-    <section class="section quiz" id="quiz">
+    <section class="section quiz-section" id="quiz">
         <div class="container">
-            <div class="section__header">
-                <span class="section__subtitle">Teste seus conhecimentos</span>
-                <h2 class="section__title">Quiz Sustentável 🎯</h2>
-                <p class="section__description">
-                    Responda às perguntas e descubra o quanto você sabe sobre 
-                    agricultura sustentável e meio ambiente!
-                </p>
+            <div class="section-header">
+                <span class="section-tag">Aprendizado</span>
+                <h2 class="section-title">Quiz: Teste seus Conhecimentos</h2>
+                <p class="section-subtitle">Descubra o quanto você sabe sobre agro sustentável!</p>
             </div>
-            <div class="quiz__container reveal">
-                <div class="quiz__progress">
-                    <div class="quiz__progress-bar" id="progressBar"></div>
-                    <span class="quiz__progress-text" id="progressText">Pergunta 1 de 5</span>
+            <div class="quiz-container">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar" id="quizProgress"></div>
+                    <span class="quiz-progress-text">Pergunta <span id="currentQ">1</span> de <span id="totalQ">5</span></span>
                 </div>
-                <div class="quiz__question" id="question">
-                    Carregando pergunta...
+                <div class="quiz-body" id="quizBody">
+                    <h3 class="quiz-question" id="quizQuestion"></h3>
+                    <div class="quiz-options" id="quizOptions"></div>
                 </div>
-                <div class="quiz__options" id="options"></div>
-                <div class="quiz__feedback" id="feedback"></div>
-                <button class="btn btn--primary" id="nextBtn" style="display:none;">Próxima ➡️</button>
-                <div class="quiz__final" id="quizFinal" style="display:none;">
-                    <div class="final__icon">🏆</div>
-                    <h3>Quiz Finalizado!</h3>
-                    <p class="final__score" id="finalScore">0/5</p>
-                    <p class="final__message" id="finalMessage"></p>
-                    <button class="btn btn--primary" id="restartBtn">Refazer Quiz 🔄</button>
+                <div class="quiz-result hidden" id="quizResult">
+                    <div class="result-icon" id="resultIcon">🏆</div>
+                    <h3 class="result-title" id="resultTitle"></h3>
+                    <p class="result-text" id="resultText"></p>
+                    <button class="btn btn-primary" id="restartQuiz">Jogar novamente</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTATO -->
-    <section class="section contact" id="contato">
+    <!-- CALCULADORA -->
+    <section class="section calculator" id="calculadora">
         <div class="container">
-            <div class="section__header">
-                <span class="section__subtitle">Fale conosco</span>
-                <h2 class="section__title">Junte-se ao Movimento 💚</h2>
-                <p class="section__description">
-                    Quer fazer parte dessa transformação? Envie sua mensagem 
-                    e vamos construir juntos um futuro mais sustentável.
-                </p>
+            <div class="section-header">
+                <span class="section-tag">Impacto</span>
+                <h2 class="section-title">Calculadora de Pegada Verde</h2>
+                <p class="section-subtitle">Descubra seu impacto ambiental e receba dicas para reduzir.</p>
             </div>
-            <form class="contact__form reveal" id="contactForm">
-                <div class="form__row">
-                    <div class="form__group">
-                        <label for="nome">Nome completo</label>
-                        <input type="text" id="nome" required placeholder="Seu nome">
+            <div class="calc-container">
+                <form class="calc-form" id="calcForm">
+                    <div class="calc-field">
+                        <label for="alimentacao">🥗 Como é sua alimentação?</label>
+                        <select id="alimentacao" required>
+                            <option value="20">Muito baseada em produtos industrializados</option>
+                            <option value="10">Mista, com alguns alimentos frescos</option>
+                            <option value="5">Rica em frutas, verduras e alimentos da estação</option>
+                            <option value="2">Orgânicos e de produtores locais</option>
+                        </select>
                     </div>
-                    <div class="form__group">
-                        <label for="email">E-mail</label>
-                        <input type="email" id="email" required placeholder="seu@email.com">
+                    <div class="calc-field">
+                        <label for="desperdicio">🍎 Quanto você desperdiça de comida?</label>
+                        <select id="desperdicio" required>
+                            <option value="15">Jogo muita comida fora</option>
+                            <option value="8">Desperdiço às vezes</option>
+                            <option value="3">Aproveito quase tudo</option>
+                            <option value="1">Não desperdiço nada</option>
+                        </select>
                     </div>
+                    <div class="calc-field">
+                        <label for="consumo">🛒 Como você cons?</label>
+                        <select id="consumo" required>
+                            <option value="12">Compro muito, sem pensar</option>
+                            <option value="7">Compro o necessário</option>
+                            <option value="3">Prefiro produtos duráveis</option>
+                            <option value="1">Reutilizo e conserto sempre</option>
+                        </select>
+                    </div>
+                    <div class="calc-field">
+                        <label for="natureza">🌳 Você tem contato com a natureza?</label>
+                        <select id="natureza" required>
+                            <option value="10">Quase nunca</option>
+                            <option value="5">De vez em quando</option>
+                            <option value="2">Frequentemente</option>
+                            <option value="0">Vivo no campo / cuido de plantas</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Calcular meu impacto</button>
+                </form>
+                <div class="calc-result hidden" id="calcResult">
+                    <div class="calc-score">
+                        <div class="score-circle" id="scoreCircle">
+                            <span class="score-value" id="scoreValue">0</span>
+                            <span class="score-label">pontos</span>
+                        </div>
+                    </div>
+                    <h3 class="calc-title" id="calcTitle"></h3>
+                    <p class="calc-text" id="calcText"></p>
+                    <ul class="calc-tips" id="calcTips"></ul>
+                    <button class="btn btn-secondary" id="resetCalc">Calcular novamente</button>
                 </div>
-                <div class="form__group">
-                    <label for="assunto">Assunto</label>
-                    <select id="assunto" required>
-                        <option value="">Selecione...</option>
-                        <option value="duvida">Dúvida</option>
-                        <option value="sugestao">Sugestão</option>
-                        <option value="parceria">Parceria</option>
-                        <option value="outro">Outro</option>
-                    </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTRIBUA -->
+    <section class="section contribute" id="contribua">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Ação</span>
+                <h2 class="section-title">Como Você Pode Contribuir</h2>
+                <p class="section-subtitle">Pequenas atitudes geram grandes transformações.</p>
+            </div>
+            <div class="contribute-grid">
+                <div class="contribute-card">
+                    <div class="contribute-icon">🛒</div>
+                    <h3>Compre do Produtor Local</h3>
+                    <p>Feiras livres e agricultura familiar fortalecem a economia local e garantem alimentos mais frescos.</p>
                 </div>
-                <div class="form__group">
-                    <label for="mensagem">Mensagem</label>
-                    <textarea id="mensagem" rows="5" required placeholder="Escreva sua mensagem..."></textarea>
+                <div class="contribute-card">
+                    <div class="contribute-icon">♻️</div>
+                    <h3>Reduza o Desperdício</h3>
+                    <p>Planeje refeições, reaproveite alimentos e composte orgânicos. Cada grama conta!</p>
                 </div>
-                <button type="submit" class="btn btn--primary">Enviar Mensagem 📩</button>
-            </form>
+                <div class="contribute-card">
+                    <div class="contribute-icon">🌱</div>
+                    <h3>Plante uma Árvore</h3>
+                    <p>Uma árvore absorve até 1 tonelada de CO₂ ao longo da vida. Comece no seu quintal!</p>
+                </div>
+                <div class="contribute-card">
+                    <div class="contribute-icon">📚</div>
+                    <h3>Compartilhe Conhecimento</h3>
+                    <p>Converse com amigos e família sobre agro sustentável. Informação transforma!</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
-            <div class="footer__grid">
-                <div class="footer__col">
-                    <h3>🌱 Agrinho</h3>
-                    <p>Do campo à cidade, cultivando o futuro sustentável com educação, consciência e amor à terra.</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🌱</span>
+                        <span class="logo-text">Agrinho</span>
+                    </div>
+                    <p class="footer-about">
+                        Site educativo desenvolvido para o concurso Agrinho, 
+                        promovendo a conscientização sobre agricultura sustentável.
+                    </p>
                 </div>
-                <div class="footer__col">
-                    <h4>Links Rápidos</h4>
+                <div class="footer-col">
+                    <h4>Navegação</h4>
                     <ul>
                         <li><a href="#home">Início</a></li>
-                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#sobre">O Agro</a></li>
+                        <li><a href="#pilares">Pilares</a></li>
                         <li><a href="#praticas">Práticas</a></li>
-                        <li><a href="#quiz">Quiz</a></li>
                     </ul>
                 </div>
-                <div class="footer__col">
-                    <h4>Programa Agrinho</h4>
-                    <p>Uma iniciativa do Sistema FAEP/SENAR-PR que há mais de 25 anos leva educação e cidadania para crianças e jovens.</p>
+                <div class="footer-col">
+                    <h4>Interativo</h4>
+                    <ul>
+                        <li><a href="#quiz">Quiz</a></li>
+                        <li><a href="#calculadora">Calculadora</a></li>
+                        <li><a href="#ods">ODS</a></li>
+                        <li><a href="#contribua">Contribua</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Referências</h4>
+                    <ul>
+                        <li>Embrapa</li>
+                        <li>FAEP / SENAR-PR</li>
+                        <li>ONU - Agenda 2030</li>
+                        <li>Ministério da Agricultura</li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer__bottom">
-                <p>&copy; 2026 Agrinho - Agro Forte, Futuro Sustentável. Feito com 💚 para o futuro.</p>
+            <div class="footer-bottom">
+                <p>© 2026 - Site Agrinho | Agro Forte, Futuro Sustentável 🌱</p>
+                <p>Desenvolvido com 💚 para um futuro melhor</p>
             </div>
         </div>
     </footer>
