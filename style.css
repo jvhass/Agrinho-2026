@@ -1,368 +1,957 @@
-// ===== MENU MOBILE =====
-const navToggle = document.getElementById('nav-toggle');
-const navMenu = document.getElementById('nav-menu');
-const navLinks = document.querySelectorAll('.nav__link');
-
-navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-});
-
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-    });
-});
-
-// ===== HEADER SCROLL =====
-const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
-});
-
-// ===== LINK ATIVO CONFORME SCROLL =====
-const sections = document.querySelectorAll('section[id]');
-window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY + 100;
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
-        const link = document.querySelector(`.nav__link[href="#${sectionId}"]`);
-        
-        if (link) {
-            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                navLinks.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-            }
-        }
-    });
-});
-
-// ===== ANIMAÇÃO DE CONTADORES =====
-const statNumbers = document.querySelectorAll('.stat__number');
-let statsAnimated = false;
-
-function animateStats() {
-    if (statsAnimated) return;
-    statNumbers.forEach(num => {
-        const target = +num.getAttribute('data-target');
-        const duration = 2000;
-        const step = target / (duration / 16);
-        let current = 0;
-        
-        const update = () => {
-            current += step;
-            if (current < target) {
-                num.textContent = Math.floor(current);
-                requestAnimationFrame(update);
-            } else {
-                num.textContent = target;
-            }
-        };
-        update();
-    });
-    statsAnimated = true;
+/* ===== RESET E VARIÁVEIS ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-// ===== ANIMAÇÃO REVEAL AO SCROLL =====
-const revealElements = document.querySelectorAll('.reveal');
-
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            
-            // Ativa contadores quando a hero aparece
-            if (entry.target.closest('.hero')) {
-                animateStats();
-            }
-        }
-    });
-}, { threshold: 0.15 });
-
-revealElements.forEach(el => revealObserver.observe(el));
-
-// Ativa contadores quando a hero entra em vista
-const heroObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) animateStats();
-    });
-}, { threshold: 0.3 });
-
-const hero = document.querySelector('.hero');
-if (hero) heroObserver.observe(hero);
-
-// ===== CALCULADORA DE PEGADA ECOLÓGICA =====
-const banho = document.getElementById('banho');
-const carne = document.getElementById('carne');
-const plastico = document.getElementById('plastico');
-const transporte = document.getElementById('transporte');
-
-const banhoValue = document.getElementById('banhoValue');
-const carneValue = document.getElementById('carneValue');
-const plasticoValue = document.getElementById('plasticoValue');
-const transporteValue = document.getElementById('transporteValue');
-
-function updateValues() {
-    banhoValue.textContent = banho.value + ' min';
-    carneValue.textContent = carne.value + ' dias';
-    plasticoValue.textContent = plastico.value + ' vezes';
-    transporteValue.textContent = transporte.value + ' km';
+:root {
+    --primary: #2d6a4f;
+    --primary-dark: #1b4332;
+    --primary-light: #52b788;
+    --secondary: #d4a373;
+    --accent: #f9c74f;
+    --bg-light: #f8f9f4;
+    --bg-white: #ffffff;
+    --text-dark: #1a1a1a;
+    --text-gray: #555;
+    --text-light: #888;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+    --transition: all 0.3s ease;
+    --radius: 12px;
 }
 
-[banho, carne, plastico, transporte].forEach(input => {
-    input.addEventListener('input', updateValues);
-});
-
-document.getElementById('calcBtn').addEventListener('click', () => {
-    // Cálculo aproximado de CO2 emitido por mês (kg)
-    const co2Banho = (banho.value * 0.5) * 30; // água aquecida
-    const co2Carne = (carne.value * 4) * 4; // kg CO2 por refeição
-    const co2Plastico = plastico.value * 0.5 * 4; // produção plástico
-    const co2Transporte = (transporte.value * 0.21) * 30; // carro comum
-    
-    const totalCO2 = co2Banho + co2Carne + co2Plastico + co2Transporte;
-    const arvores = Math.ceil(totalCO2 / 22); // 1 árvore absorve ~22kg CO2/ano
-    
-    const resultNumber = document.getElementById('resultNumber');
-    const resultText = document.getElementById('resultText');
-    const resultTip = document.getElementById('resultTip');
-    
-    resultNumber.textContent = arvores;
-    
-    if (arvores <= 5) {
-        resultText.textContent = 'Excelente! Sua pegada é bem pequena! 🌟';
-        resultTip.textContent = '💡 Continue assim! Você é um exemplo de consciência ambiental.';
-    } else if (arvores <= 15) {
-        resultText.textContent = 'Sua pegada está moderada. Pode melhorar! 🌿';
-        resultTip.textContent = '💡 Tente reduzir o uso do carro e consumir menos carne vermelha.';
-    } else if (arvores <= 30) {
-        resultText.textContent = 'Atenção! Sua pegada está alta. ⚠️';
-        resultTip.textContent = '💡 Reduza banhos demorados, evite plásticos e prefira transporte público.';
-    } else {
-        resultText.textContent = 'Sua pegada está muito alta! 🚨';
-        resultTip.textContent = '💡 Pequenas mudanças fazem grande diferença. Comece hoje mesmo!';
-    }
-    
-    // Animação do resultado
-    const result = document.querySelector('.calculator__result');
-    result.style.animation = 'none';
-    setTimeout(() => {
-        result.style.animation = 'fadeInUp 0.6s ease';
-    }, 10);
-});
-
-// ===== QUIZ =====
-const quizData = [
-    {
-        question: "🌱 O que é agricultura sustentável?",
-        options: [
-            "Usar apenas agrotóxicos fortes",
-            "Produzir respeitando o meio ambiente e as pessoas",
-            "Desmatar florestas para plantar",
-            "Ignorar as leis ambientais"
-        ],
-        correct: 1,
-        explanation: "✅ Correto! A agricultura sustentável busca equilibrar produção com preservação ambiental e valorização social."
-    },
-    {
-        question: "💧 Qual técnica ajuda a economizar água no campo?",
-        options: [
-            "Irrigação por gotejamento",
-            "Deixar a torneira aberta",
-            "Regar ao meio-dia",
-            "Usar mangueiras o dia todo"
-        ],
-        correct: 0,
-        explanation: "✅ Exato! O gotejamento leva a água direto na raiz, economizando até 70% de água!"
-    },
-    {
-        question: "🌳 O que é o sistema ILPF?",
-        options: [
-            "Um tipo de adubo químico",
-            "Integração Lavoura-Pecuária-Floresta",
-            "Uma marca de trator",
-            "Um programa de computador"
-        ],
-        correct: 1,
-        explanation: "✅ Perfeito! O ILPF combina agricultura, pecuária e floresta na mesma área, aumentando a produtividade e a sustentabilidade."
-    },
-    {
-        question: "🐝 Qual a importância das abelhas na agricultura?",
-        options: [
-            "Elas só fazem mel",
-            "Elas polinizam as plantas, ajudando na produção",
-            "Elas comem as pragas",
-            "Elas não têm importância"
-        ],
-        correct: 1,
-        explanation: "✅ Isso mesmo! Cerca de 75% das culturas agrícolas dependem da polinização das abelhas!"
-    },
-    {
-        question: "♻️ O que é controle biológico?",
-        options: [
-            "Usar mais agrotóxicos",
-            "Queimar as plantações",
-            "Usar inimigos naturais para controlar pragas",
-            "Deixar as pragas se multiplicarem"
-        ],
-        correct: 2,
-        explanation: "✅ Correto! O controle biológico usa predadores naturais das pragas, reduzindo o uso de químicos."
-    }
-];
-
-let currentQuestion = 0;
-let score = 0;
-let answered = false;
-
-const questionEl = document.getElementById('question');
-const optionsEl = document.getElementById('options');
-const feedbackEl = document.getElementById('feedback');
-const nextBtn = document.getElementById('nextBtn');
-const progressBar = document.getElementById('progressBar');
-const progressText = document.getElementById('progressText');
-const quizFinal = document.getElementById('quizFinal');
-
-function loadQuestion() {
-    answered = false;
-    const q = quizData[currentQuestion];
-    questionEl.textContent = q.question;
-    optionsEl.innerHTML = '';
-    feedbackEl.className = 'quiz__feedback';
-    feedbackEl.style.display = 'none';
-    nextBtn.style.display = 'none';
-    
-    q.options.forEach((opt, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'quiz__option';
-        btn.textContent = opt;
-        btn.addEventListener('click', () => selectAnswer(index, btn));
-        optionsEl.appendChild(btn);
-    });
-    
-    progressText.textContent = `Pergunta ${currentQuestion + 1} de ${quizData.length}`;
-    progressBar.style.width = `${((currentQuestion + 1) / quizData.length) * 100}%`;
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
 }
 
-function selectAnswer(index, btn) {
-    if (answered) return;
-    answered = true;
-    
-    const q = quizData[currentQuestion];
-    const allOptions = document.querySelectorAll('.quiz__option');
-    
-    allOptions.forEach((opt, i) => {
-        if (i === q.correct) {
-            opt.classList.add('correct');
-        }
-        opt.style.pointerEvents = 'none';
-    });
-    
-    if (index === q.correct) {
-        score++;
-        btn.classList.add('correct');
-        feedbackEl.textContent = q.explanation;
-        feedbackEl.className = 'quiz__feedback correct show';
-    } else {
-        btn.classList.add('wrong');
-        feedbackEl.textContent = `❌ Resposta correta: ${q.options[q.correct]}`;
-        feedbackEl.className = 'quiz__feedback wrong show';
-    }
-    
-    feedbackEl.style.display = 'block';
-    nextBtn.style.display = 'inline-block';
-    nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'Ver Resultado 🏆' : 'Próxima ➡️';
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+    background: var(--bg-light);
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
-nextBtn.addEventListener('click', () => {
-    currentQuestion++;
-    if (currentQuestion < quizData.length) {
-        loadQuestion();
-    } else {
-        showFinal();
-    }
-});
-
-function showFinal() {
-    questionEl.style.display = 'none';
-    optionsEl.style.display = 'none';
-    feedbackEl.style.display = 'none';
-    nextBtn.style.display = 'none';
-    document.querySelector('.quiz__progress').style.display = 'none';
-    quizFinal.style.display = 'block';
-    
-    document.getElementById('finalScore').textContent = `${score}/${quizData.length}`;
-    
-    let message = '';
-    if (score === quizData.length) {
-        message = '🌟 Incrível! Você é um verdadeiro especialista em sustentabilidade!';
-    } else if (score >= 3) {
-        message = '🌿 Muito bom! Você tem bons conhecimentos sobre o tema.';
-    } else {
-        message = '📚 Continue estudando! Cada aprendizado conta para um futuro melhor.';
-    }
-    document.getElementById('finalMessage').textContent = message;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-document.getElementById('restartBtn').addEventListener('click', () => {
-    currentQuestion = 0;
-    score = 0;
-    questionEl.style.display = 'block';
-    optionsEl.style.display = 'flex';
-    document.querySelector('.quiz__progress').style.display = 'block';
-    quizFinal.style.display = 'none';
-    loadQuestion();
-});
+img {
+    max-width: 100%;
+    display: block;
+}
 
-// Inicia o quiz
-loadQuestion();
+a {
+    text-decoration: none;
+    color: inherit;
+}
 
-// ===== FORMULÁRIO DE CONTATO =====
-document.getElementById('contactForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const nome = document.getElementById('nome').value;
-    const btn = e.target.querySelector('button[type="submit"]');
-    const originalText = btn.textContent;
-    
-    btn.textContent = 'Enviando...';
-    btn.disabled = true;
-    
-    setTimeout(() => {
-        alert(`✅ Obrigado, ${nome}! Sua mensagem foi enviada com sucesso. Em breve entraremos em contato! 🌱`);
-        e.target.reset();
-        btn.textContent = originalText;
-        btn.disabled = false;
-    }, 1000);
-});
+ul {
+    list-style: none;
+}
 
-// ===== BOTÃO VOLTAR AO TOPO =====
-const backToTop = document.getElementById('backToTop');
+/* ===== HEADER ===== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: var(--transition);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+}
 
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-        backToTop.classList.add('show');
-    } else {
-        backToTop.classList.remove('show');
+.header.scrolled {
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.nav__logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.logo-icon {
+    font-size: 2rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.nav__list {
+    display: flex;
+    gap: 30px;
+}
+
+.nav__link {
+    font-weight: 500;
+    color: var(--text-dark);
+    position: relative;
+    transition: var(--transition);
+}
+
+.nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: var(--transition);
+}
+
+.nav__link:hover,
+.nav__link.active {
+    color: var(--primary);
+}
+
+.nav__link:hover::after,
+.nav__link.active::after {
+    width: 100%;
+}
+
+.nav__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.nav__toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--primary-dark);
+    border-radius: 3px;
+    transition: var(--transition);
+}
+
+/* ===== HERO ===== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 100px 0 50px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #52b788 100%);
+}
+
+.hero__bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+    animation: zoomBg 20s infinite alternate;
+}
+
+@keyframes zoomBg {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+.hero__content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+}
+
+.hero__subtitle {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: fadeInUp 1s ease;
+}
+
+.hero__title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    animation: fadeInUp 1s ease 0.2s backwards;
+}
+
+.highlight {
+    color: var(--accent);
+    position: relative;
+    display: inline-block;
+}
+
+.hero__text {
+    font-size: 1.15rem;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    opacity: 0.95;
+    animation: fadeInUp 1s ease 0.4s backwards;
+}
+
+.hero__buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+    animation: fadeInUp 1s ease 0.6s backwards;
+}
+
+.hero__stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    animation: fadeInUp 1s ease 0.8s backwards;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat__number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--accent);
+    display: inline;
+}
+
+.stat__plus {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.stat__label {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: 5px;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0.8;
+    animation: fadeInUp 1s ease 1s backwards;
+}
+
+.scroll-arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(45deg);
+    margin: 10px auto 0;
+    animation: scrollDown 2s infinite;
+}
+
+@keyframes scrollDown {
+    0% { transform: rotate(45deg) translate(0, 0); opacity: 1; }
+    100% { transform: rotate(45deg) translate(10px, 10px); opacity: 0; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
     }
-});
-
-backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// ===== EFEITO PARALLAX SUAVE NO HERO =====
-window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const heroBg = document.querySelector('.hero__bg');
-    if (heroBg && scrolled < 800) {
-        heroBg.style.transform = `translateY(${scrolled * 0.3}px) scale(1.1)`;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
-});
+}
 
-console.log('🌱 Site Agrinho carregado com sucesso!');
-console.log('💚 Agro Forte, Futuro Sustentável');
+/* ===== BOTÕES ===== */
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    font-family: inherit;
+}
+
+.btn--primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 5px 20px rgba(45, 106, 79, 0.3);
+}
+
+.btn--primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(45, 106, 79, 0.4);
+}
+
+.btn--secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn--secondary:hover {
+    background: white;
+    color: var(--primary-dark);
+    transform: translateY(-3px);
+}
+
+/* ===== SEÇÕES GERAIS ===== */
+.section {
+    padding: 100px 0;
+}
+
+.section__header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.section__subtitle {
+    display: inline-block;
+    color: var(--primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
+
+.section__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.section__description {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+}
+
+/* ===== SOBRE ===== */
+.about {
+    background: var(--bg-white);
+}
+
+.about__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.about__card {
+    background: var(--bg-light);
+    padding: 40px 30px;
+    border-radius: var(--radius);
+    text-align: center;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.about__card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-light);
+    box-shadow: var(--shadow);
+}
+
+.about__icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: var(--transition);
+}
+
+.about__card:hover .about__icon {
+    transform: scale(1.2) rotate(10deg);
+}
+
+.about__card h3 {
+    color: var(--primary-dark);
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.about__card p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+}
+
+/* ===== PRÁTICAS ===== */
+.practices {
+    background: linear-gradient(180deg, var(--bg-light) 0%, #e8f5e9 100%);
+}
+
+.practices__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.practice__card {
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.practice__card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.practice__image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    transition: var(--transition);
+}
+
+.practice__card:hover .practice__image {
+    transform: scale(1.05);
+}
+
+.practice__content {
+    padding: 25px;
+}
+
+.practice__tag {
+    display: inline-block;
+    padding: 5px 12px;
+    background: var(--primary-light);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.practice__content h3 {
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.practice__content p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+}
+
+/* ===== CALCULADORA ===== */
+.impact {
+    background: var(--bg-white);
+}
+
+.calculator {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    padding: 50px;
+    border-radius: 20px;
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.calculator__form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form__group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form__group label {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.form__group input[type="range"] {
+    width: 100%;
+    height: 6px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.form__group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--accent);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.form__group input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.range-value {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+
+.calculator__result {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: var(--radius);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.result__icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.result__title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.result__number {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--accent);
+    margin: 10px 0;
+}
+
+.result__text {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.result__tip {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* ===== QUIZ ===== */
+.quiz {
+    background: linear-gradient(180deg, #e8f5e9 0%, var(--bg-light) 100%);
+}
+
+.quiz__container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.quiz__progress {
+    margin-bottom: 30px;
+}
+
+.quiz__progress-bar {
+    height: 8px;
+    background: var(--bg-light);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.quiz__progress-bar::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 20%;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    transition: width 0.5s ease;
+}
+
+.quiz__progress-text {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.quiz__question {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+.quiz__options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.quiz__option {
+    padding: 15px 20px;
+    background: var(--bg-light);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1rem;
+    text-align: left;
+    font-family: inherit;
+    color: var(--text-dark);
+}
+
+.quiz__option:hover {
+    border-color: var(--primary-light);
+    background: #e8f5e9;
+    transform: translateX(5px);
+}
+
+.quiz__option.correct {
+    background: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.quiz__option.wrong {
+    background: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
+.quiz__feedback {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    display: none;
+}
+
+.quiz__feedback.show {
+    display: block;
+    animation: fadeInUp 0.5s ease;
+}
+
+.quiz__feedback.correct {
+    background: #d4edda;
+    color: #155724;
+}
+
+.quiz__feedback.wrong {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.quiz__final {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.final__icon {
+    font-size: 5rem;
+    margin-bottom: 15px;
+    animation: bounce 1s infinite;
+}
+
+.quiz__final h3 {
+    color: var(--primary-dark);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.final__score {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin: 15px 0;
+}
+
+.final__message {
+    color: var(--text-gray);
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+/* ===== CONTATO ===== */
+.contact {
+    background: var(--bg-white);
+}
+
+.contact__form {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--bg-light);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.contact__form .form__group {
+    margin-bottom: 20px;
+}
+
+.contact__form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--primary-dark);
+}
+
+.contact__form input,
+.contact__form select,
+.contact__form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition);
+    background: white;
+}
+
+.contact__form input:focus,
+.contact__form select:focus,
+.contact__form textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
+}
+
+.contact__form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    background: var(--primary-dark);
+    color: white;
+    padding: 60px 0 20px;
+}
+
+.footer__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer__col h3,
+.footer__col h4 {
+    margin-bottom: 15px;
+    color: var(--accent);
+}
+
+.footer__col p {
+    opacity: 0.85;
+    line-height: 1.7;
+}
+
+.footer__col ul li {
+    margin-bottom: 10px;
+}
+
+.footer__col ul li a {
+    opacity: 0.85;
+    transition: var(--transition);
+}
+
+.footer__col ul li a:hover {
+    opacity: 1;
+    color: var(--accent);
+    padding-left: 5px;
+}
+
+.footer__bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+/* ===== BOTÃO VOLTAR AO TOPO ===== */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    z-index: 999;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background: var(--primary-dark);
+    transform: translateY(-5px);
+}
+
+/* ===== ANIMAÇÃO REVEAL ===== */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 992px) {
+    .calculator {
+        grid-template-columns: 1fr;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav__toggle {
+        display: flex;
+    }
+
+    .nav__menu {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: calc(100vh - 70px);
+        background: white;
+        padding: 40px 30px;
+        transition: var(--transition);
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav__menu.active {
+        right: 0;
+    }
+
+    .nav__list {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .hero__stats {
+        gap: 30px;
+    }
+
+    .stat__number {
+        font-size: 2.2rem;
+    }
+
+    .form__row {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding: 70px 0;
+    }
+
+    .quiz__container {
+        padding: 25px;
+    }
+
+    .contact__form {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero__buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero__buttons .btn {
+        width: 100%;
+    }
+
+    .hero__stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .back-to-top {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+    }
+}
