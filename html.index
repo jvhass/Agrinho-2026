@@ -1,40 +1,348 @@
+
+---
+
+## 📄 2. index.html
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Agrinho - Agro no Paraná</title>
+    <meta name="description" content="Agrinho - Agro Forte, Futuro Sustentável. Descubra como a agricultura sustentável constrói um futuro melhor.">
+    <meta name="keywords" content="Agrinho, agricultura sustentável, meio ambiente, agro, futuro">
+    <title>Agrinho 🌱 | Agro Forte, Futuro Sustentável</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <header>
-        <h1>Agrinho: O Futuro do Agro no Paraná</h1>
-        <p>Inovação, tecnologia e sustentabilidade no campo.</p>
+    <!-- HEADER / NAVEGAÇÃO -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#home" class="nav__logo">
+                <span class="logo-icon">🌱</span>
+                <span class="logo-text">Agrinho</span>
+            </a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#home" class="nav__link active">Início</a></li>
+                    <li class="nav__item"><a href="#sobre" class="nav__link">Sobre</a></li>
+                    <li class="nav__item"><a href="#praticas" class="nav__link">Práticas</a></li>
+                    <li class="nav__item"><a href="#impacto" class="nav__link">Impacto</a></li>
+                    <li class="nav__item"><a href="#quiz" class="nav__link">Quiz</a></li>
+                    <li class="nav__item"><a href="#contato" class="nav__link">Contato</a></li>
+                </ul>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
     </header>
 
-    <main class="container">
-        <section class="card">
-            <h2>Interatividade com o Solo</h2>
-            <p>Clique no botão abaixo para simular uma análise rápida de umidade do solo paranaense.</p>
-            <button id="btn-analise">Simular Análise</button>
-            <p id="resultado-analise" class="resultado"></p>
-        </section>
+    <!-- HERO / INÍCIO -->
+    <section class="hero" id="home">
+        <div class="hero__bg"></div>
+        <div class="hero__content container">
+            <span class="hero__subtitle">Programa Agrinho 2026</span>
+            <h1 class="hero__title">
+                Agro <span class="highlight">Forte</span>,<br>
+                Futuro <span class="highlight">Sustentável</span>
+            </h1>
+            <p class="hero__text">
+                Do campo à cidade, cultivamos um futuro onde a produção agrícola 
+                caminha lado a lado com a preservação ambiental. Descubra como 
+                cada gesto conta para transformar o mundo.
+            </p>
+            <div class="hero__buttons">
+                <a href="#sobre" class="btn btn--primary">Explorar 🌿</a>
+                <a href="#quiz" class="btn btn--secondary">Fazer o Quiz 🎯</a>
+            </div>
+            <div class="hero__stats">
+                <div class="stat">
+                    <span class="stat__number" data-target="150">0</span><span class="stat__plus">+</span>
+                    <span class="stat__label">Anos de Agricultura</span>
+                </div>
+                <div class="stat">
+                    <span class="stat__number" data-target="30">0</span><span class="stat__plus">%</span>
+                    <span class="stat__label">Energia Renovável</span>
+                </div>
+                <div class="stat">
+                    <span class="stat__number" data-target="1000">0</span><span class="stat__plus">+</span>
+                    <span class="stat__label">Comunidades</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Role para baixo</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
 
-        <section class="card">
-            <h2>Contato / Inscrição</h2>
-            <form id="form-agrinho">
-                <label for="nome">Nome do Aluno/Produtor:</label>
-                <input type="text" id="nome" required placeholder="Digite seu nome">
-                
-                <button type="submit">Enviar Dados</button>
+    <!-- SOBRE -->
+    <section class="section about" id="sobre">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__subtitle">Conheça o tema</span>
+                <h2 class="section__title">O que é um Agro Sustentável?</h2>
+                <p class="section__description">
+                    A agricultura sustentável é aquela que produz alimentos de qualidade, 
+                    respeitando o meio ambiente, valorizando o trabalhador rural e garantindo 
+                    recursos para as próximas gerações.
+                </p>
+            </div>
+            <div class="about__grid">
+                <div class="about__card reveal">
+                    <div class="about__icon">🌾</div>
+                    <h3>Produção Consciente</h3>
+                    <p>
+                        Cultivar respeitando os ciclos da natureza, usando técnicas que 
+                        preservam o solo e a biodiversidade, sem comprometer a produtividade.
+                    </p>
+                </div>
+                <div class="about__card reveal">
+                    <div class="about__icon">💧</div>
+                    <h3>Uso Inteligente da Água</h3>
+                    <p>
+                        Sistemas de irrigação eficientes e captação de água da chuva 
+                        garantem o uso racional do recurso mais precioso do planeta.
+                    </p>
+                </div>
+                <div class="about__card reveal">
+                    <div class="about__icon">🌳</div>
+                    <h3>Preservação Ambiental</h3>
+                    <p>
+                        Manter florestas em pé, proteger nascentes e recuperar áreas 
+                        degradadas é essencial para o equilíbrio ecológico.
+                    </p>
+                </div>
+                <div class="about__card reveal">
+                    <div class="about__icon">👨‍🌾</div>
+                    <h3>Valorização do Campo</h3>
+                    <p>
+                        Fortalecer a agricultura familiar, garantir condições dignas de 
+                        trabalho e valorizar quem produz nosso alimento.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRÁTICAS SUSTENTÁVEIS -->
+    <section class="section practices" id="praticas">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__subtitle">Soluções reais</span>
+                <h2 class="section__title">Práticas que Transformam</h2>
+                <p class="section__description">
+                    Conheça técnicas inovadoras que estão revolucionando o campo brasileiro, 
+                    unindo tecnologia e sustentabilidade.
+                </p>
+            </div>
+            <div class="practices__grid">
+                <article class="practice__card reveal">
+                    <div class="practice__image" style="background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600')"></div>
+                    <div class="practice__content">
+                        <span class="practice__tag">Tecnologia</span>
+                        <h3>Agricultura de Precisão</h3>
+                        <p>Uso de drones, sensores e GPS para aplicar insumos apenas onde necessário, reduzindo desperdícios e impactos ambientais.</p>
+                    </div>
+                </article>
+                <article class="practice__card reveal">
+                    <div class="practice__image" style="background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600')"></div>
+                    <div class="practice__content">
+                        <span class="practice__tag">Solo</span>
+                        <h3>Plantio Direto</h3>
+                        <p>Técnica que mantém a palhada sobre o solo, preservando a umidade, evitando erosão e aumentando a fertilidade natural.</p>
+                    </div>
+                </article>
+                <article class="practice__card reveal">
+                    <div class="practice__image" style="background-image: url('https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600')"></div>
+                    <div class="practice__content">
+                        <span class="practice__tag">Integração</span>
+                        <h3>Sistema ILPF</h3>
+                        <p>Integração Lavoura-Pecuária-Floresta combina produção agrícola, animal e florestal numa mesma área, potencializando resultados.</p>
+                    </div>
+                </article>
+                <article class="practice__card reveal">
+                    <div class="practice__image" style="background-image: url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600')"></div>
+                    <div class="practice__content">
+                        <span class="practice__tag">Energia</span>
+                        <h3>Energia Solar no Campo</h3>
+                        <p>Painéis solares alimentam irrigação, cercas elétricas e residências rurais, reduzindo custos e emissões de carbono.</p>
+                    </div>
+                </article>
+                <article class="practice__card reveal">
+                    <div class="practice__image" style="background-image: url('https://images.unsplash.com/photo-1592982537447-6f2a6a0c7c18?w=600')"></div>
+                    <div class="practice__content">
+                        <span class="practice__tag">Biodiversidade</span>
+                        <h3>Controle Biológico</h3>
+                        <p>Uso de insetos benéficos e microrganismos para combater pragas, diminuindo o uso de agrotóxicos químicos.</p>
+                    </div>
+                </article>
+                <article class="practice__card reveal">
+                    <div class="practice__image" style="background-image: url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600')"></div>
+                    <div class="practice__content">
+                        <span class="practice__tag">Orgânico</span>
+                        <h3>Agricultura Orgânica</h3>
+                        <p>Produção sem agrotóxicos nem fertilizantes sintéticos, valorizando a saúde do solo, dos alimentos e das pessoas.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALCULADORA DE IMPACTO -->
+    <section class="section impact" id="impacto">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__subtitle">Calcule seu impacto</span>
+                <h2 class="section__title">Pegada Ecológica 🌍</h2>
+                <p class="section__description">
+                    Descubra quantas árvores seriam necessárias para compensar 
+                    suas escolhas diárias. Pequenas atitudes geram grandes mudanças!
+                </p>
+            </div>
+            <div class="calculator reveal">
+                <div class="calculator__form">
+                    <div class="form__group">
+                        <label for="banho">🚿 Minutos de banho por dia:</label>
+                        <input type="range" id="banho" min="5" max="30" value="10">
+                        <span class="range-value" id="banhoValue">10 min</span>
+                    </div>
+                    <div class="form__group">
+                        <label for="carne">🥩 Dias de carne por semana:</label>
+                        <input type="range" id="carne" min="0" max="7" value="3">
+                        <span class="range-value" id="carneValue">3 dias</span>
+                    </div>
+                    <div class="form__group">
+                        <label for="plastico">🛍️ Uso de plástico por semana:</label>
+                        <input type="range" id="plastico" min="0" max="20" value="5">
+                        <span class="range-value" id="plasticoValue">5 vezes</span>
+                    </div>
+                    <div class="form__group">
+                        <label for="transporte">🚗 Km de carro por dia:</label>
+                        <input type="range" id="transporte" min="0" max="100" value="20">
+                        <span class="range-value" id="transporteValue">20 km</span>
+                    </div>
+                    <button class="btn btn--primary" id="calcBtn">Calcular Impacto 🌱</button>
+                </div>
+                <div class="calculator__result" id="result">
+                    <div class="result__icon">🌳</div>
+                    <h3 class="result__title">Resultado</h3>
+                    <p class="result__number" id="resultNumber">0</p>
+                    <p class="result__text" id="resultText">
+                        Preencha os dados e clique em calcular!
+                    </p>
+                    <div class="result__tip" id="resultTip"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="section quiz" id="quiz">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__subtitle">Teste seus conhecimentos</span>
+                <h2 class="section__title">Quiz Sustentável 🎯</h2>
+                <p class="section__description">
+                    Responda às perguntas e descubra o quanto você sabe sobre 
+                    agricultura sustentável e meio ambiente!
+                </p>
+            </div>
+            <div class="quiz__container reveal">
+                <div class="quiz__progress">
+                    <div class="quiz__progress-bar" id="progressBar"></div>
+                    <span class="quiz__progress-text" id="progressText">Pergunta 1 de 5</span>
+                </div>
+                <div class="quiz__question" id="question">
+                    Carregando pergunta...
+                </div>
+                <div class="quiz__options" id="options"></div>
+                <div class="quiz__feedback" id="feedback"></div>
+                <button class="btn btn--primary" id="nextBtn" style="display:none;">Próxima ➡️</button>
+                <div class="quiz__final" id="quizFinal" style="display:none;">
+                    <div class="final__icon">🏆</div>
+                    <h3>Quiz Finalizado!</h3>
+                    <p class="final__score" id="finalScore">0/5</p>
+                    <p class="final__message" id="finalMessage"></p>
+                    <button class="btn btn--primary" id="restartBtn">Refazer Quiz 🔄</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="section contact" id="contato">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__subtitle">Fale conosco</span>
+                <h2 class="section__title">Junte-se ao Movimento 💚</h2>
+                <p class="section__description">
+                    Quer fazer parte dessa transformação? Envie sua mensagem 
+                    e vamos construir juntos um futuro mais sustentável.
+                </p>
+            </div>
+            <form class="contact__form reveal" id="contactForm">
+                <div class="form__row">
+                    <div class="form__group">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" required placeholder="Seu nome">
+                    </div>
+                    <div class="form__group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" required placeholder="seu@email.com">
+                    </div>
+                </div>
+                <div class="form__group">
+                    <label for="assunto">Assunto</label>
+                    <select id="assunto" required>
+                        <option value="">Selecione...</option>
+                        <option value="duvida">Dúvida</option>
+                        <option value="sugestao">Sugestão</option>
+                        <option value="parceria">Parceria</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+                <div class="form__group">
+                    <label for="mensagem">Mensagem</label>
+                    <textarea id="mensagem" rows="5" required placeholder="Escreva sua mensagem..."></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary">Enviar Mensagem 📩</button>
             </form>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer>
-        <p>&copy; 2026 Projeto Agrinho - Programação Web</p>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__col">
+                    <h3>🌱 Agrinho</h3>
+                    <p>Do campo à cidade, cultivando o futuro sustentável com educação, consciência e amor à terra.</p>
+                </div>
+                <div class="footer__col">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#praticas">Práticas</a></li>
+                        <li><a href="#quiz">Quiz</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Programa Agrinho</h4>
+                    <p>Uma iniciativa do Sistema FAEP/SENAR-PR que há mais de 25 anos leva educação e cidadania para crianças e jovens.</p>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 Agrinho - Agro Forte, Futuro Sustentável. Feito com 💚 para o futuro.</p>
+            </div>
+        </div>
     </footer>
+
+    <!-- Botão voltar ao topo -->
+    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
 
     <script src="script.js"></script>
 </body>
